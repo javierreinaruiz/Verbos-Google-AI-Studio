@@ -20,6 +20,20 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+    <script>
+      // Gracefully prevent transient preview WebSocket closing messages from bubbling
+      window.addEventListener('error', function(e) {
+        if (e && e.message && (e.message.indexOf('WebSocket') !== -1 || e.message.indexOf('closed without opened') !== -1)) {
+          e.stopImmediatePropagation();
+        }
+      });
+      window.addEventListener('unhandledrejection', function(e) {
+        var reason = e && e.reason ? String(e.reason) : '';
+        if (reason.indexOf('WebSocket') !== -1 || reason.indexOf('closed without opened') !== -1) {
+          e.stopImmediatePropagation();
+        }
+      });
+    </script>
   </head>
   <body class="bg-slate-100 text-slate-800 antialiased select-none font-sans min-h-screen">
     <div id="root"></div>
