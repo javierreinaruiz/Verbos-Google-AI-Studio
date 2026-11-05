@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10B981"/>
+      <stop offset="100%" stop-color="#047857"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCD34D"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#064E3B" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Background with rounded corners (safe margin for maskable) -->
+  <rect width="512" height="512" rx="110" fill="url(#bgGrad)"/>
+
+  <!-- Inner circle glow -->
+  <circle cx="256" cy="256" r="190" fill="#ffffff" fill-opacity="0.12"/>
+
+  <!-- Book Base / Shield -->
+  <g filter="url(#shadow)">
+    <!-- Shield / App Icon -->
+    <path d="M140 160 C140 140 256 120 256 120 C256 120 372 140 372 160 C372 280 256 360 256 370 C256 360 140 280 140 160 Z" fill="#ffffff"/>
+    
+    <!-- Inner Accent -->
+    <path d="M158 175 C158 160 256 142 256 142 C256 142 354 160 354 175 C354 270 256 338 256 346 C256 338 158 270 158 175 Z" fill="#F0FDF4"/>
+
+    <!-- Letter V & Lightning Bolt -->
+    <!-- Stylized 'V' -->
+    <path d="M190 200 L236 310 Q246 330 256 330 Q266 330 276 310 L322 200 C326 190 318 180 306 180 L286 180 C278 180 272 185 268 194 L256 230 L244 194 C240 185 234 180 226 180 L206 180 C194 180 186 190 190 200 Z" fill="#10B981"/>
+
+    <!-- Lightning Spark in Golden Yellow -->
+    <path d="M260 170 L234 235 L264 235 L242 290 L286 220 L256 220 L275 170 Z" fill="url(#goldGrad)" stroke="#ffffff" stroke-width="3" stroke-linejoin="round"/>
+
+    <!-- Little Star Sparkles -->
+    <polygon points="340,140 344,152 356,156 344,160 340,172 336,160 324,156 336,152" fill="url(#goldGrad)"/>
+    <polygon points="170,290 173,299 182,302 173,305 170,314 167,305 158,302 167,299" fill="url(#goldGrad)"/>
+  </g>
+
+  <!-- Cheerful Verb Tag -->
+  <rect x="176" y="390" width="160" height="42" rx="21" fill="#FEF08A" stroke="#CA8A04" stroke-width="3"/>
+  <text x="256" y="419" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="22" fill="#854D0E" text-anchor="middle" letter-spacing="2">VERBOS</text>
+</svg>

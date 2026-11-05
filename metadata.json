@@ -1,0 +1,8 @@
+{
+  "name": "VerboLingo - Verbos Irregulares en Inglés PWA",
+  "description": "Aprende, practica y domina los más de 175 verbos irregulares en inglés con gamificación estilo Duolingo, pronunciación de voz, retos interactivos y modo PWA offline.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
