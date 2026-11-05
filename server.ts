@@ -1,4 +1,5 @@
 import express from 'express';
+import http from 'http';
 import {GoogleGenAI, ThinkingLevel} from '@google/genai';
 import dotenv from 'dotenv';
 import path from 'path';
@@ -115,14 +116,34 @@ Incluye también 3 oraciones de ejemplo reales del día a día (una para cada fo
 // Vite middleware or Static files serving
 async function setupServer() {
   const isProd = process.env.NODE_ENV === 'production';
+  const httpServer = http.createServer(app);
+  const publicDir = path.resolve(__dirname, 'public');
+
+  // Serve Service Worker with proper scope headers
+  app.get('/sw.js', (_req, res) => {
+    res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
+    res.setHeader('Service-Worker-Allowed', '/');
+    res.setHeader('Cache-Control', 'no-cache');
+    res.sendFile(path.join(publicDir, 'sw.js'));
+  });
+
+  // Serve Manifest files with proper MIME type
+  app.get(['/manifest.webmanifest', '/manifest.json'], (_req, res) => {
+    res.setHeader('Content-Type', 'application/manifest+json; charset=utf-8');
+    res.setHeader('Cache-Control', 'no-cache');
+    res.sendFile(path.join(publicDir, 'manifest.webmanifest'));
+  });
+
+  app.use(express.static(publicDir));
 
   if (!isProd) {
+    const isHmrDisabled = process.env.DISABLE_HMR === 'true';
     const {createServer: createViteServer} = await import('vite');
     const vite = await createViteServer({
       server: {
         middlewareMode: true,
-        hmr: process.env.DISABLE_HMR !== 'true',
-        watch: process.env.DISABLE_HMR === 'true' ? null : {},
+        hmr: isHmrDisabled ? false : { server: httpServer },
+        watch: isHmrDisabled ? null : {},
       },
       appType: 'spa',
     });
@@ -136,7 +157,7 @@ async function setupServer() {
     });
   }
 
-  app.listen(port, '0.0.0.0', () => {
+  httpServer.listen(port, '0.0.0.0', () => {
     console.log(`Server listening at http://0.0.0.0:${port}`);
   });
 }
